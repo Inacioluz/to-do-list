@@ -1,0 +1,74 @@
+.comment {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  flex: 1 0 0;
+  border-radius: 8px;
+}
+.comment input {
+  display: flex;
+  width: 28rem;
+  padding: 1rem;
+  align-items: center;
+  gap: 0.5px;
+  border-radius: 8px;
+  border: 1px solid var(--gray-700);
+  background: var(--gray-500);
+}
+.comment button {
+  display: flex;
+  padding: 1rem;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 8px;
+  background: var(--blue-dark);
+  color: #fff;
+}
+.table_tasks {
+  display: flex;
+  width: 563px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 20px;
+  align-items: center;
+  justify-content: center;
+  margin-left: 23rem;
+  margin-top: 40px;
+}
+.create_completed {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  align-self: stretch;
+}
+.body_tarefas {
+  display: flex;
+  padding: 64px 20px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+  align-self: stretch;
+}
+.body_tarefas strong {
+  font-size: 16px;
+}
+
+.criados {
+  color: var(--Blue, #4ea8de);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+.concluidas{
+  color: var(--Purple, #8284FA);
+  font-family: Inter;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
