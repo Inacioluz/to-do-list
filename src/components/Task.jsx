@@ -10,15 +10,24 @@ export function Task() {
 
   const addTask = () => {
     if (newTask.trim() !== '') {
-      const updateTasks = [
+      const updatedTasks = [
         ...tasks,
         {id:Date.now(), text: newTask, completed: false},
 
       ];
-      setTasks(updateTasks)
+      setTasks(updatedTasks)
       setNewTask('')
     }
   }
+
+  const toggleTask = (taskId) => {
+    const updatedTasks = tasks.map((task) => 
+    task.id === taskId ? {...task, completed: !task.completed } : task 
+    )
+    setNewTask(updatedTasks)
+  }
+
+  
 
 
   return (
