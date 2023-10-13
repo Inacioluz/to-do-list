@@ -5,13 +5,16 @@ import Clipboard from "../assets/clipboard.svg";
 export function Comment() {
   return (
     <div>
-      <div className={styles.comment}>
-        <input placeholder="Adicione uma nova terefa" type="text" />
+      <div className={styles.constainer}>
+        <div className={styles.comment}>
+          <input placeholder="Adicione uma nova terefa" type="text" />
         <button>
           Criar
           <img src={plus} alt="mais ao lado do button" />
         </button>
-      </div>
+        </div>
+        
+      
       <div className={styles.table_tasks}>
         <div  className={styles.create_completed}>
           <div className={styles.criados}>
@@ -28,6 +31,7 @@ export function Comment() {
           <p>Você ainda não tem tarefas cadastradas</p>
           <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
+      </div>
       </div>
     </div>
   );
