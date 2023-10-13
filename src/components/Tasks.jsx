@@ -1,8 +1,8 @@
-import styles from "./Comment.module.css";
+import styles from "./Tasks.module.css";
 import plus from "../assets/plus.svg";
 import Clipboard from "../assets/clipboard.svg";
 
-export function Comment() {
+export function Tasks() {
   return (
     <div>
       <div className={styles.constainer}>
