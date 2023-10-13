@@ -1,13 +1,32 @@
-import styles from "./Tasks.module.css";
+import styles from "./Task.module.css";
 import plus from "../assets/plus.svg";
 import Clipboard from "../assets/clipboard.svg";
+import { useState } from 'react';
 
-export function Tasks() {
+
+export function Task() {
+  const [tasks, setTasks] = useState([]);
+  const [newTask, setNewTask] = useState('')
+
+  const addTask = () => {
+    if (newTask.trim() !== '') {
+      const updateTasks = [
+        ...tasks,
+        {id:Date.now(), text: newTask, completed: false},
+
+      ];
+      setTasks(updateTasks)
+      setNewTask('')
+    }
+  }
+
+
   return (
     <div>
       <div className={styles.constainer}>
         <div className={styles.comment}>
-          <input placeholder="Adicione uma nova terefa" type="text" />
+          <input 
+          placeholder="Adicione uma nova terefa"/>
         <button>
           Criar
           <img src={plus} alt="mais ao lado do button" />

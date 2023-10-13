@@ -1,5 +1,5 @@
 import { Header } from './components/Header';
-import { Tasks } from './components/Tasks'
+import { Task } from './components/Task'
 import './global.css';
 
 function App() {
@@ -7,7 +7,7 @@ function App() {
   return (
    <div>
     <Header/>
-    <Tasks/>
+    <Task/>
    </div>
   )
 }
