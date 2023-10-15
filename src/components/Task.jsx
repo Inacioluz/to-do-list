@@ -8,6 +8,7 @@ import { useState } from "react";
 export function Task() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
+  const [id, setId] = useState(0);
 
   const addTask = () => {
     if (newTask.trim() !== "") {
@@ -17,22 +18,9 @@ export function Task() {
       ];
       setTasks(updatedTasks);
       setNewTask("");
+      setId(id + 1);
     }
   };
-
-  // const toggleTask = (taskId) => {
-  //   const updatedTasks = tasks.map((task) =>
-  //   task.id === taskId ? {...task, completed: !task.completed } : task
-  //   )
-  //   setNewTask(updatedTasks)
-  // }
-
-  // const deleteTask = (taskId) => {
-  //   const updatedTasks = tasks.filter((task) => task.id !== taskId);
-  //   setTasks(updatedTasks)
-  // }
-
-  // const conpletedTasksCount = tasks.filter((task) =>task.completed).length
 
   const renderTasks = () => {
     if (tasks.length === 0) {
@@ -44,24 +32,31 @@ export function Task() {
         </div>
       );
     } else {
-      return (
-        <ul className={styles.talks_list}>
+      return tasks.map((task) => (
+        <ul key={task.id} className={styles.talks_list}>
           <img src={layer} alt="" />
-          {tasks.map((task) => (
-            <li key={task.id}>
-              {task.completed ? `[X] ${task.text}` : task.text}
-            </li>
-          ))}
+          
+          <li key={task.id}>{task.completed ? `[X] ${task.text}` : task.text}
+          </li>
           <img className={styles.deleted} src={deleted} alt="" />
         </ul>
-      );
+      ));
     }
   };
+
+  // const todoCreate = (text) => {
+  //   const todoObj = { text: text, id: id}
+  //   setId(id + 1)
+  //   addTodo(todoObj)
+  //   document.getElementById("outlined-basic").value = null
+  // }
+
   return (
     <div>
       <div className={styles.constainer}>
         <div className={styles.comment}>
           <input
+            id="outlined-basic"
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
