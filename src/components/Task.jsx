@@ -1,14 +1,16 @@
 import styles from "./Task.module.css";
 import plus from "../assets/plus.svg";
-import layer from "../assets/layer.svg";
+import layerNotDone from "../assets/layer01.svg";
+import layerDone from "../assets/layer02.svg";
 import deleted from "../assets/deleted.svg";
 import Clipboard from "../assets/clipboard.svg";
-import { useState } from "react";
+import { useState} from "react";
 
 export function Task() {
   const [tasks, setTasks] = useState([]);
   const [newTask, setNewTask] = useState("");
   const [id, setId] = useState(0);
+
 
   const addTask = () => {
     if (newTask.trim() !== "") {
@@ -20,6 +22,10 @@ export function Task() {
       setNewTask("");
       setId(id + 1);
     }
+  };
+  const handleDeleteTask = (taskId) => {
+    const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
   };
 
   const renderTasks = () => {
@@ -34,25 +40,23 @@ export function Task() {
     } else {
       return tasks.map((task) => (
         <ul key={task.id} className={styles.talks_list}>
-          <img src={layer} alt="" />
-          
-          <li key={task.id}>{task.completed ? `[X] ${task.text}` : task.text}
+          <img src={layerNotDone} alt=""/>
+          <li key={task.id}>
+            {task.completed ? `[X] ${task.text}` : task.text}
           </li>
-          <img className={styles.deleted} src={deleted} alt="" />
+          <img
+            className={styles.deleted}
+            src={deleted}
+            alt=""
+            onClick={() => handleDeleteTask(task.id)}
+          />
         </ul>
       ));
     }
   };
 
-  // const todoCreate = (text) => {
-  //   const todoObj = { text: text, id: id}
-  //   setId(id + 1)
-  //   addTodo(todoObj)
-  //   document.getElementById("outlined-basic").value = null
-  // }
-
   return (
-    <div>
+    <main>
       <div className={styles.constainer}>
         <div className={styles.comment}>
           <input
@@ -80,6 +84,6 @@ export function Task() {
           {renderTasks()}
         </div>
       </div>
-    </div>
+    </main>
   );
 }
