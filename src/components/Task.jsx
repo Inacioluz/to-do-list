@@ -3,7 +3,7 @@ import plus from '../assets/plus.svg';
 import layerNotDone from '../assets/layer01.svg';
 import layerDone from '../assets/layer02.svg';
 import deleted from '../assets/deleted.svg';
-import clipboard from '../assets/clipboard.svg';
+
 import styles from './Task.module.css';
 
 export function Task() {
@@ -40,7 +40,7 @@ export function Task() {
     if (tasks.length === 0) {
       return (
         <div className={styles.body_tarefas}>
-          <img src={clipboard} alt="" />
+          
           <p>Você ainda não tem tarefas cadastradas</p>
           <p>Crie tarefas e organize seus itens a fazer</p>
         </div>
