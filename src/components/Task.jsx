@@ -1,30 +1,38 @@
-import styles from "./Task.module.css";
-import plus from "../assets/plus.svg";
-import layerNotDone from "../assets/layer01.svg";
-import layerDone from "../assets/layer02.svg";
-import deleted from "../assets/deleted.svg";
-import Clipboard from "../assets/clipboard.svg";
-import { useState} from "react";
+import { useState } from 'react';
+import plus from '../assets/plus.svg';
+import layerNotDone from '../assets/layer01.svg';
+import layerDone from '../assets/layer02.svg';
+import deleted from '../assets/deleted.svg';
+import Clipboard from '../assets/clipboard.svg';
+import styles from './Task.module.css';
 
 export function Task() {
   const [tasks, setTasks] = useState([]);
-  const [newTask, setNewTask] = useState("");
-  const [id, setId] = useState(0);
-
+  const [newTask, setNewTask] = useState('');
 
   const addTask = () => {
-    if (newTask.trim() !== "") {
+    if (newTask.trim() !== '') {
       const updatedTasks = [
         ...tasks,
         { id: Date.now(), text: newTask, completed: false },
       ];
       setTasks(updatedTasks);
-      setNewTask("");
-      setId(id + 1);
+      setNewTask('');
     }
   };
+
   const handleDeleteTask = (taskId) => {
     const updatedTasks = tasks.filter((task) => task.id !== taskId);
+    setTasks(updatedTasks);
+  };
+
+  const handleDoneTask = (taskId) => {
+    const updatedTasks = tasks.map((task) => {
+      if (task.id === taskId) {
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
     setTasks(updatedTasks);
   };
 
@@ -39,10 +47,14 @@ export function Task() {
       );
     } else {
       return tasks.map((task) => (
-        <ul key={task.id} className={styles.talks_list}>
-          <img src={layerNotDone} alt=""/>
+        <ul key={task.id} className={`${styles.talks_list} ${task.completed ? styles.completedTask : ''} `}>
+          <img
+            src={task.completed ? layerDone : layerNotDone}
+            alt=""
+            onClick={() => handleDoneTask(task.id)}
+          />
           <li key={task.id}>
-            {task.completed ? `[X] ${task.text}` : task.text}
+            {task.completed ? `${task.text}` : task.text}
           </li>
           <img
             className={styles.deleted}
@@ -57,14 +69,14 @@ export function Task() {
 
   return (
     <main>
-      <div className={styles.constainer}>
+      <div className={styles.container}>
         <div className={styles.comment}>
           <input
             id="outlined-basic"
             type="text"
             value={newTask}
             onChange={(e) => setNewTask(e.target.value)}
-            placeholder="Adicione uma nova terefa"
+            placeholder="Adicione uma nova tarefa"
           />
           <button onClick={addTask}>
             Criar
@@ -75,10 +87,10 @@ export function Task() {
         <div className={styles.table_tasks}>
           <div className={styles.create_completed}>
             <div className={styles.criados}>
-              <strong>Criadas 0 </strong>
+              <p>Criadas <strong>{tasks.length}</strong></p>
             </div>
             <div className={styles.concluidas}>
-              <strong>Concluidas 0</strong>
+              <p>Concluídas <strong>{tasks.filter((task) => task.completed).length} de {tasks.length}</strong> </p>
             </div>
           </div>
           {renderTasks()}
